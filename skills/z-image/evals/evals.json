@@ -1,0 +1,61 @@
+{
+  "skill": "z-image",
+  "description": "Trigger accuracy evaluation for the z-image skill. Each entry is a user prompt that should or should not trigger this skill.",
+  "version": "1.0",
+  "should_trigger": [
+    {
+      "query": "Write me a Z-Image Turbo prompt for a photorealistic portrait of an older woman in a bakery.",
+      "why": "Canonical prompt-writing request for the model this skill covers."
+    },
+    {
+      "query": "Why does my negative prompt do nothing in Z-Image Turbo?",
+      "why": "Turbo has no CFG so the negative channel is inert - the skill's headline fact."
+    },
+    {
+      "query": "Z-Image gives me almost the same picture on every seed. How do I get variety?",
+      "why": "Turbo is rated Low diversity; skill documents prompt-varying tactics and the switch to base."
+    },
+    {
+      "query": "What steps and guidance should I use for Tongyi Z-Image?",
+      "why": "Per-variant inference settings: Turbo 9/0.0, base 28-50/3.0-5.0."
+    },
+    {
+      "query": "How do I get Z-Image to render a headline correctly on a poster?",
+      "why": "Bilingual text rendering with quoted strings - documented capability."
+    },
+    {
+      "query": "My local image model output looks plastic and airbrushed, running mflux-generate-z-image-turbo.",
+      "why": "Names the runner command and the classic missing-texture failure mode."
+    },
+    {
+      "query": "Should I use Z-Image or Z-Image-Turbo for a batch of illustration variants?",
+      "why": "Variant selection question, the core fork in this skill."
+    },
+    {
+      "query": "Can I use Z-Image-Edit to change an object in my photo?",
+      "why": "Skill must state that Edit was still unreleased on the official Model Zoo."
+    }
+  ],
+  "should_not_trigger": [
+    {
+      "query": "Generate a video from this image.",
+      "why": "Video generation - not this model."
+    },
+    {
+      "query": "Write me a Nano Banana prompt for a YouTube thumbnail.",
+      "why": "Different vendor and model - nano-banana skill."
+    },
+    {
+      "query": "How do I install CUDA drivers on Ubuntu?",
+      "why": "Systems admin, not prompt writing."
+    },
+    {
+      "query": "Recommend a stock photo site for commercial use.",
+      "why": "Not generation at all."
+    },
+    {
+      "query": "Explain how diffusion models work mathematically.",
+      "why": "Theory question, not prompt craft for this model."
+    }
+  ]
+}

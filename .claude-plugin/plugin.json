@@ -1,0 +1,24 @@
+{
+  "name": "z-image-prompt-generator",
+  "displayName": "Z-Image Prompt Generator",
+  "version": "1.0.0",
+  "description": "Write and improve prompts for Z-Image, Alibaba Tongyi-MAI's open-weights 6B image model, and pick the right variant. Covers the Turbo vs. base fork that decides whether negative prompts work at all, the dense-clause prompt style the model was tuned on, photorealism vocabulary, bilingual English/Chinese text rendering, the prompt-enhancer workflow, and the correct inference settings per variant.",
+  "author": {
+    "name": "Maciej Dzierżek",
+    "url": "https://maciejdzierzek.com"
+  },
+  "homepage": "https://maciejdzierzek.com/narzedzia",
+  "repository": "https://github.com/maciejdzierzek/z-image-prompt-generator",
+  "license": "MIT",
+  "keywords": [
+    "z-image",
+    "z-image-turbo",
+    "tongyi",
+    "image-generation",
+    "prompt-engineering",
+    "open-weights",
+    "local-ai",
+    "mflux",
+    "comfyui"
+  ]
+}
