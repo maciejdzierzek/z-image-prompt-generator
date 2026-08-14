@@ -3,8 +3,11 @@
 > A Claude skill for writing prompts for **Z-Image**, Alibaba Tongyi-MAI's open-weights 6B image model.
 > Works with Claude.ai, Claude Desktop, and Claude Code.
 
+[![Live Generator](https://img.shields.io/badge/Live_Generator-maciejdzierzek.com-blue)](https://maciejdzierzek.com/narzedzia/generator-promptow/?model=z-image)
 [![Claude Skill](https://img.shields.io/badge/Claude-Skill-orange)](https://claude.ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+**Prefer a form over a conversation?** The same four models have a web generator, no install and no account: [maciejdzierzek.com/narzedzia/generator-promptow](https://maciejdzierzek.com/narzedzia/generator-promptow/?model=z-image)
 
 ## What is this?
 
@@ -89,7 +92,7 @@ Every factual claim is verified against Tongyi-MAI-controlled sources - the GitH
 
 ## About
 
-Built by [Maciej Dzierżek](https://maciejdzierzek.com). All AI tools: [maciejdzierzek.com/narzedzia](https://maciejdzierzek.com/narzedzia)
+Built by [Maciej Dzierżek](https://maciejdzierzek.com). All AI tools: [maciejdzierzek.com/narzedzia](https://maciejdzierzek.com/narzedzia/)
 
 Companion skills: [nano-banana](https://github.com/maciejdzierzek/nano-banana-prompt-generator) (Gemini images) · [kling-ai](https://github.com/maciejdzierzek/kling-ai-prompt-generator) and [seedance](https://github.com/maciejdzierzek/seedance-prompt-generator) (AI video)
 
