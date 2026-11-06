@@ -8,7 +8,7 @@ when_to_use: Use for anything involving Z-Image, Z-Image-Turbo, Z-Image-Edit, Z-
 
 Z-Image (造相) is an open-weights image generation family from **Alibaba's Tongyi-MAI**, Apache-2.0, **6B parameters**, built on a Scalable Single-Stream DiT (S3-DiT) architecture. It runs locally: the Turbo variant fits in **16 GB VRAM** and reaches sub-second latency on an H800.
 
-Facts here are verified against Tongyi-MAI's own sources (GitHub README, Hugging Face model card, project blog) on **2026-08-05**. Community-sourced claims are labelled as such. See "Verification & Sources".
+Facts here are verified against Tongyi-MAI's own sources (GitHub README, Hugging Face model card, project blog) on **2026-08-05**, with the model family re-checked and mflux behaviour updated from its release notes on **2026-11-06** (no new Z-Image weights since January 2026). Community-sourced claims are labelled as such. See "Verification & Sources".
 
 ---
 
@@ -219,7 +219,7 @@ Z-Image is open weights, so "how you run it" is separate from "how you prompt it
 
 - **diffusers** - `ZImagePipeline`, the reference path. Requires diffusers from source at the time the model card was written (two PRs were merged upstream). bfloat16, optional Flash Attention backend, `pipe.transformer.compile()`, and `enable_model_cpu_offload()` for tight memory.
 - **ComfyUI** - node ecosystem; a community node exists supplying the official Z-Image resolutions as latents.
-- **mflux** (Apple Silicon, MLX) - the practical local route on a Mac; exposes Turbo as its own generate command with `--seed` accepting multiple values for a batch in one process.
+- **mflux** (Apple Silicon, MLX) - the practical local route on a Mac; exposes Turbo as its own generate command with `--seed` accepting multiple values for a batch in one process. Since 0.21 Python callers can load once and generate many through `ZImageTurboCommand.load` and `.generate`, which is the fastest route for a series. Behaviour changed in 0.22: the transformer runs in bfloat16 (about 30% faster on an M5; in our test on an M2 Max a 1024x1024 Turbo image went from 114 s to 91 s between 0.18 and 0.24), and **the same seed now gives a slightly different image**. Add `--float32` to reproduce an image from an older release, for example when extending an existing series. `--compute-precision float16` is an opt-in speed-up. Also since 0.22 mflux warns when a prompt fills the 512-token limit; before that the extra text was dropped silently. A 1024x1024 VAE decode needs about 1.6 GB since 0.24 instead of 7-14 GB.
 - **Hosted demos** - Hugging Face Spaces and ModelScope, both first-party, for prompt iteration before committing to local runs.
 
 Whatever the runner, the two settings that decide whether output looks right are the ones above: **steps and guidance must match the variant**. A Turbo checkpoint run at guidance 4 with 50 steps, or a base checkpoint run at guidance 0 with 8 steps, produces garbage - and it is a very common misconfiguration when a runner's defaults were written for a different model.
@@ -236,7 +236,7 @@ Whatever the runner, the two settings that decide whether output looks right are
 | Output looks washed out or muddy | Guidance/steps mismatched to the variant | Turbo: `steps=9, guidance=0.0`. Base: `steps=28-50, guidance=3.0-5.0` |
 | Realism still off on base model | `cfg_normalization` wrong way round | `True` for realism, `False` for general stylism |
 | Style is mush | Two competing style families in one prompt | One style family per prompt |
-| End of a long prompt appears ignored | Token cap - demo default is 512 | `max_sequence_length=1024` locally, or shorten; move must-haves earlier |
+| End of a long prompt appears ignored | Token cap - demo default is 512; mflux warns about it since 0.22 | `max_sequence_length=1024` in diffusers, or shorten; move must-haves earlier |
 | Short prompt gives a weak generic image | The model expects dense specifics | Run the prompt-enhancer workflow: expand to dense clauses before generating |
 | Rendered text garbled | Too much text, or an unsupported language/rare glyphs | Fewer, shorter quoted strings; English or Chinese; common characters. Otherwise set type in post |
 | Composition ignores your layout | Spatial relations left implicit | State position explicitly, relative to a named element |
